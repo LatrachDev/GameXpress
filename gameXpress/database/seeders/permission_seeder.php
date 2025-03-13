@@ -42,11 +42,11 @@ class permission_seeder extends Seeder
         $user_manager->givePermissionTo(['view_users', 'create_users', 'edit_users', 'delete_users']);
 
         // demo user
-        $admin = User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('password')
-        ]);
-        $admin->assignRole('super_admin');
+        // $admin = User::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => bcrypt('password')
+        // ]);
+        // $admin->assignRole('super_admin');
     }
 }
