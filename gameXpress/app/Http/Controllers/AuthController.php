@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Contracts\Role;
 
 class AuthController extends Controller
 {
@@ -24,9 +25,10 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        if (User::count() === 0)
+        if ($user->id==1)
         {
             $user->assignRole('super_admin');
+           
         }
 
         return response()->json([
