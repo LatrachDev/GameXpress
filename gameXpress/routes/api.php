@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Api\V1\Admin\ProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\V1\Admin\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -40,11 +41,19 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::get('v1/admin/dashboard', [DashboardController::class, 'index']);
     Route::post('v1/admin/logout', [AuthController::class, 'logout']);
     
+    // products
     Route::get('v1/admin/products', [ProductController::class, 'index']);
     Route::get('v1/admin/products/{id}', [ProductController::class, 'show']);
     Route::post('v1/admin/products', [ProductController::class, 'store']);
     Route::put('v1/admin/products/{id}', [ProductController::class, 'update']);
     Route::delete('v1/admin/products/{id}', [ProductController::class, 'destroy']);
+
+    // categories
+    Route::get('v1/admin/categories', [CategoryController::class, 'index']);
+    Route::get('v1/admin/categories/{id}', [CategoryController::class, 'show']);
+    Route::put('v1/admin/categories/{id}', [CategoryController::class, 'update']);
+    Route::delete('v1/admin/categories/{id}', [CategoryController::class, 'destroy']);
+    Route::post('v1/admin/categories', [CategoryController::class, 'store']);
 });
 
 
