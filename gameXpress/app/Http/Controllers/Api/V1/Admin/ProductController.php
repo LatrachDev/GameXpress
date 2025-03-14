@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if (!$request->user()->can('view_products')) {
-            return response()->json(['message' => 'Accès interdit'], 403);
+            return response()->json(['message' => 'unauthorized'], 403);
         }
 
         // $emailResponse = $this->sendEmail();
@@ -26,7 +26,7 @@ class ProductController extends Controller
         $products = Product::all();
 
         return response()->json([
-            'message' => 'Accès autorisé',
+            'message' => 'Access authorized',
             'data' => $products,
             'count' => $products->count(),
         ], 200);
@@ -51,11 +51,11 @@ class ProductController extends Controller
     public function show(Request $request, $id)
     {
         if (!$request->user()->can('view_products')) {
-            return response()->json(['message' => 'Accès interdit'], 403);
+            return response()->json(['message' => 'unauthorized'], 403);
         }
         $product = Product::find($id);
         if (!$product) {
-            return response()->json(['message' => 'Produit non trouvé'], 404);
+            return response()->json(['message' => 'Product not found'], 404);
         }
         return response()->json($product);
     }
@@ -63,7 +63,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         if (!$request->user()->can('create_products')) {
-            return response()->json(['message' => 'Accès interdit'], 403);
+            return response()->json(['message' => 'unauthorized'], 403);
         }
         $request->validate([
             'name' => 'required|string|max:255',
@@ -89,19 +89,19 @@ class ProductController extends Controller
             }
         }
 
-        return response()->json(['message' => 'Produit ajouté avec succès', 'product' => $product->load('images')], 201);
+        return response()->json(['message' => 'Product added successfully', 'product' => $product->load('images')], 201);
     }
 
     public function update(Request $request, $id)
     {
 
         if (!$request->user()->can('edit_products')) {
-            return response()->json(['message' => 'Accès interdit'], 403);
+            return response()->json(['message' => 'unauthorized'], 403);
         }
 
         $product = Product::find($id);
         if (!$product) {
-            return response()->json(['message' => 'Produit non trouvé'], 404);
+            return response()->json(['message' => 'Product not found'], 404);
         }
         $product->update($request->except('images'));
 
@@ -118,20 +118,20 @@ class ProductController extends Controller
                 ]);
             }
         }
-        return response()->json(['message' => 'Produit mis à jour', 'product' => $product->load('images')], 200);
+        return response()->json(['message' => 'Product updated', 'product' => $product->load('images')], 200);
     }
 
 
     public function destroy(Request $request, $id)
     {
         if (!$request->user()->can('delete_products')) {
-            return response()->json(['message' => 'Accès interdit'], 403);
+            return response()->json(['message' => 'unauthorized'], 403);
         }
         $product = Product::find($id);
         if (!$product) {
-            return response()->json(['message' => 'Produit non trouvé'], 404);
+            return response()->json(['message' => 'Product not found'], 404);
         }
         $product->delete();
-        return response()->json(['message' => 'Produit supprimé'], 200);
+        return response()->json(['message' => 'Product deleted'], 200);
     }
 }
