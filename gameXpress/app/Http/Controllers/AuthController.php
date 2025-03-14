@@ -15,8 +15,8 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:6'
-            // 'role' => 'required|string|exists:roles,name',
+            'password' => 'required|string|min:6',
+            'role' => 'required|string|on:super_admin,product_manager,user_manager',
         ]);
 
         $user = User::create([
@@ -25,11 +25,11 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        if ($user->id==1)
-        {
-            $user->assignRole('super_admin');
+        // if ($user->id==1)
+        // {
+            $user->assignRole($request->role);
            
-        }
+        // }
 
         return response()->json([
             'message' => 'User created successfully',
@@ -54,6 +54,8 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken($user->email)->plainTextToken; // plainTextToken -> extracts the raw token value
+        // $user->assignRole('super_admin');
+
         return response()->json([
             'message' => 'User logged in successfully',
             'user' => $user,
