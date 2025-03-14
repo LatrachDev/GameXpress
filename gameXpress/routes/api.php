@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Api\V1\Admin\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\V1\Admin\CategoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\V1\Admin\UserManageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -54,8 +56,10 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::put('v1/admin/categories/{id}', [CategoryController::class, 'update']);
     Route::delete('v1/admin/categories/{id}', [CategoryController::class, 'destroy']);
     Route::post('v1/admin/categories', [CategoryController::class, 'store']);
-});
 
+
+    Route::resource('/v1/admin/users',UserManageController::class);
+});
 
 
 Route::get('/test', function (Request $request) {
