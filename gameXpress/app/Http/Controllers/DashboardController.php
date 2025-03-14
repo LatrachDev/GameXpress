@@ -20,11 +20,11 @@ class DashboardController extends Controller
         }
        
       
-            return response()->json([
-                'total_users' => User::count(),
-                'total_products' => Product::count(),
-                'total_orders' => Order::count()
-            ]);
+        return response()->json([
+            'total_users' => User::count(),
+            'total_products' => Product::count(),
+            'total_orders' => Order::count()
+        ]);
         
 
     }
