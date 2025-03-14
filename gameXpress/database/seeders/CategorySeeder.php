@@ -9,14 +9,16 @@ class CategorySeeder extends Seeder
 {
     public function run()
     {
-        Category::create([
-            'name' => 'Electronics',
-            'slug' => 'electronics',
-        ]);
+        // Category::create([
+        //     'name' => 'Electronics',
+        //     'slug' => 'electronics',
+        // ]);
 
-        Category::create([
-            'name' => 'Clothing',
-            'slug' => 'clothing',
-        ]);
+        // Category::create([
+        //     'name' => 'Clothing',
+        //     'slug' => 'clothing',
+        // ]);
+
+        Category::factory(5)->create();
     }
 }
