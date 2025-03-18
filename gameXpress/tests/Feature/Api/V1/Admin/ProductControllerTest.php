@@ -52,7 +52,6 @@ class ProductControllerTest extends TestCase
         /** @test */
         public function it_can_create_a_new_product()
         {
-        // Category::factory(3)->create();
         $productData = [
             'name' => 'Product test',
             'price' => 20.50,

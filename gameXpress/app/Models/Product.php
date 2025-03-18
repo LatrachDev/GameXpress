@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\ProductImage
+use App\Models\ProductImage;
 use App\Models\Category;
 
 class Product extends Model
